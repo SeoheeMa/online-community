@@ -1,5 +1,5 @@
 '''
-Root directories URLs file for the entire project
+Root directory URLs file for the entire project
 '''
 from django.contrib import admin
 from django.urls import path, include
