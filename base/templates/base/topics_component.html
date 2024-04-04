@@ -1,12 +1,15 @@
-<h3>Browse Topics</h3>
-<hr>
-
-<div>
-    <a href="{% url 'home' %}">All</a>
+<div class="topics">
+    <div class="topics__header">
+        <h2>카테고리</h2>
+    </div>
+    <ul class="topics__list">
+        <li>
+            <a href="{% url 'home' %}" class="active">전체보기 <span>{{topics.count}}</span></a>
+        </li>
+        {% for topic in topics %}
+        <li>
+            <a href="{% url 'home' %}?q={{topic.name}}">{{topic.name}}<span>{{topic.room_set.all.count}}</span></a>
+        </li>
+        {% endfor %}
+    </ul>
 </div>
-
-{% for topic in topics %}
-<div>
-    <a href="{% url 'home' %}?q={{ topic.name }}">{{ topic.name }}</a>
-</div>
-{% endfor %}
