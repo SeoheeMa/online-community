@@ -266,13 +266,20 @@ a {
 ================================*/
 
 .header {
-  padding: 1.5rem;
+  padding: 1.5rem 0;
   background-color: var(--color-dark);
 }
 
 .header>.container {
   display: flex;
-  gap: 9.5rem;
+}
+
+.header__logo{
+  flex-basis: 18%;
+}
+
+.header__user{
+  flex-basis: 25%;
 }
 
 .header__logo,
@@ -300,6 +307,10 @@ a {
   align-items: center;
   gap: 1rem;
   border-radius: 4px;
+}
+
+.header__search{
+  flex-basis: 50%;
 }
 
 .header__search svg {
@@ -340,8 +351,10 @@ a {
 }
 
 .header__menu {
-  margin-left: auto;
   position: relative;
+  width: 30rem;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .header__menu a {
@@ -397,6 +410,7 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  padding: 4px;
 }
 
 .layout--3>.container>div:first-child {
