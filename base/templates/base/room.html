@@ -4,6 +4,34 @@
 
 {% block content %}
 
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>score demo</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/hiphop5782/score@latest/score.js"></script>
+  <script>
+    $(function () {
+      $(".test-score1").score();
+      $(".test-score2").score({
+        editable: true,
+        display: {
+          showNumber: true,
+          placeLimit: 2
+        }
+      });
+      $(".test-score3").score({
+        editable: true,
+        integerOnly: true,
+        display: {
+          showNumber: true
+        }
+      });
+    });
+  </script>
+</head>
+
 <main class="profile-page layout layout--2">
   <div class="container">
     <!-- Room Start -->
@@ -73,6 +101,7 @@
             {{ room.description }}
           </div>
           <span class="room__topics">{{room.topic}}</span>
+          <div class="test-score1" data-max="5" data-rate="{{ user.rating.value }}"></div>
         </div>
         <div class="room__conversation">
           <div class="threads scroll">
@@ -139,5 +168,6 @@
   </div>
 </main>
 <script src="script.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/hiphop5782/score@latest/score.js"></script>
 
 {% endblock content %}
