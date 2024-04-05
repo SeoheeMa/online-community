@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Room
+from .models import Room, Rating
 from django.contrib.auth.models import User
 
 
@@ -14,3 +14,9 @@ class UserForm(ModelForm):
     class Meta:
         model = User
         fields = ['username', 'email']
+
+
+class RatingForm(ModelForm):
+    class Meta:
+        model = Rating
+        fields = ['value']

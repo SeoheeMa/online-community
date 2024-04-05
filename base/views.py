@@ -6,8 +6,8 @@ from django.db.models import Q
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
-from .models import Room, Topic, Message
-from .forms import RoomForm, UserForm
+from .models import Room, Topic, Message, Rating
+from .forms import RoomForm, UserForm, RatingForm
 
 
 def loginPage(request):
@@ -188,3 +188,21 @@ def updateUser(request):
             return redirect('user-profile', pk=user.id)
 
     return render(request, 'base/update-user.html', {'form': form})
+
+
+@login_required(login_url='login')
+def createRating(request, pk):
+    if request.method == 'POST':
+        form = RatingForm(request.POST)
+        if form.is_valid():
+            rating = form.save(commit=False)
+            rating.user = request.user
+            rating.room_id = pk
+            rating.save()
+
+        return redirect('room', pk=pk)
+    else:
+        form = RatingForm()
+
+    context = {'form': form}
+    return render(request, 'base/room.html', context)

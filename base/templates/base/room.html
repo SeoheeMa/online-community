@@ -56,7 +56,9 @@
         <div class="room__header scroll">
           <div class="room__info">
             <h3>{{ room.name }}</h3>
-            <span>{{ room.created | timesince }} ago</span>
+            <span>
+              평균 별점 표시
+            </span>
           </div>
           <div class="room__hosted">
             <a href="{% url 'user-profile' room.host.id %}" class="room__author">
@@ -111,7 +113,7 @@
       <div class="room__message">
         <form method="POST" action="">
           {% csrf_token %}
-          <input name="body" placeholder="Write your message here..." />
+          <input name="body" placeholder="강의에 대한 생각을 자유롭게 적어주세요!" />
         </form>
       </div>
     </div>
