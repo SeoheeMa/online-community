@@ -13,12 +13,12 @@
         </div>
       </div>
       <div class="layout__body">
-        <h2 class="auth__tagline">지금까지 {{message_count}} 개의 평가가 쌓였어요!</h2>
+        <h2 class="auth__tagline">지금까지 {{Rating.value.all.count}} 개의 평가가 쌓였어요!</h2>
 
         <form class="form" method="POST" action="">
           {% csrf_token %}
           <div class="form__group form__group">
-            <label for="room_name">아이디</label>
+            <label for="username">아이디</label>
             <input id="username" name="username" type="text" />
           </div>
           <div class="form__group">

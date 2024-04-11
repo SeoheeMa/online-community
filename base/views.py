@@ -66,7 +66,7 @@ def home(request):
         Q(topic__name__icontains=q) |
         Q(name__icontains=q) |
         Q(description__icontains=q)
-    )
+    ).order_by('-created')
 
     topics = Topic.objects.all()
     room_count = rooms.count()
@@ -115,14 +115,14 @@ def createRoom(request):
         topic_name = request.POST.get('topic')
         topic, created = Topic.objects.get_or_create(name=topic_name)
 
-        Room.objects.create(
+        room = Room.objects.create(
             host=request.user,
             topic=topic,
             name=request.POST.get('name'),
             description=request.POST.get('description'),
         )
 
-        return redirect('home')
+        return redirect('room', pk=room.id)
 
     context = {'form': form, 'topics': topics}
     return render(request, 'base/room_form.html', context)
@@ -160,7 +160,7 @@ def deleteRoom(request, pk):
     if request.method == 'POST':
         room.delete()
         return redirect('home')
-    return render(request, 'base/delete.html', {'obj': room})
+    return render(request, 'base/delete.html')
 
 
 @login_required(login_url='login')
@@ -168,12 +168,13 @@ def deleteMessage(request, pk):
     message = Message.objects.get(id=pk)
 
     if request.user != message.user:
-        return HttpResponse('Your are not allowed here.')
+        return HttpResponse('다른 사람의 글을 지울 수는 없어요.')
 
     if request.method == 'POST':
+        room = message.room.id
         message.delete()
-        return redirect('home')
-    return render(request, 'base/delete.html', {'obj': message})
+        return redirect('room', pk=room)
+    return render(request, 'base/delete.html')
 
 
 @login_required(login_url='login')
