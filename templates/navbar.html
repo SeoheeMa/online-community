@@ -1,10 +1,11 @@
 
 <a href="{% url 'home' %}" class="header__logo">
-    <h1>Online Community</h1>
+    <button type="button" class="btn btn-primary btn-lg">공부자료 공유 게시판</button>
 </a>
 
 <form method="GET" action="{% url 'home' %}">
-    <input type="text" name="q" placeholder="Search Topics..." />
+    <input type="text" name="q" placeholder="게시물검색" >
+    
 </form>
 
 {% if request.user.is_authenticated %}
